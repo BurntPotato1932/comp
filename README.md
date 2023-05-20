@@ -1,4 +1,4 @@
 # comp
 aaaaaaaaaa
 
-Add a .env in the main folder with TOKEN = 'ur_token"
+Add a .env in the bot folder with TOKEN = 'ur_token"
