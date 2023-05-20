@@ -1,8 +1,7 @@
 {
-    "name": "C:\\Users\\djheb\\Desktop\\aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\\bgs\\smol.png",
+    "name": "bgs\\default.png",
     "x1": 70,
     "y1": 80,
     "x2": 500,
-    "y2": 80,
-    "img_path": "C:\\Users\\djheb\\Desktop\\aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\\bgs"
+    "y2": 80
 }
