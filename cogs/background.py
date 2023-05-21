@@ -48,8 +48,6 @@ class Background(commands.Cog):
     @commands.command(name='add_bg', brief='')
     @commands.has_any_role(1004278166237487174, 1004976425599766588, 1074003818980847716)
     async def add_bg(self, ctx, name: str, card1: str, card2: str):
-        xy1 = CC(card1)
-        xy2 = CC(card2)
         dirr = os.getcwd()
         path = f"{dirr}\\bgs"
         img_path = f"{dirr}\\bgs\\{name}.png"
