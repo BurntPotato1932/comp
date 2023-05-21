@@ -21,22 +21,18 @@ def download_image(name , url, folder_path):
 
 def save_png_details(file_path, card1, card2):
     try:
-        # Get the directory path of the original image
         directory = os.path.dirname(file_path)
         img = Image.open(file_path)
+
         details = {
-            "name": img.filename,
+            "name": str("bgs\\" + os.path.basename(img.filename)),
             "x1": CC(card1)[0],
             "y1": CC(card1)[1],
             "x2": CC(card2)[0],
-            "y2": CC(card2)[1],
-            "img_path": directory
+            "y2": CC(card2)[1]
         }
 
-        # Get the original filename without the extension
         file_name = os.path.splitext(img.filename)[0]
-
-        # Create the output file path by appending ".json" to the original filename
         output_file = os.path.join(directory, file_name + ".json")
 
         with open(output_file, "w") as f:
@@ -49,7 +45,8 @@ class Background(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
     
-    @commands.command()
+    @commands.command(name='add_bg', brief='')
+    @commands.has_any_role(1004278166237487174, 1004976425599766588, 1074003818980847716)
     async def add_bg(self, ctx, name: str, card1: str, card2: str):
         xy1 = CC(card1)
         xy2 = CC(card2)
