@@ -8,6 +8,7 @@ class Post(commands.Cog):
         self.bot = bot
 
     @commands.command(name='post', brief='Posts the matches')
+    @commands.has_any_role(1004278166237487174, 1004976425599766588, 1074003818980847716)
     async def post(self, ctx, msg=None):
         count = 0
         pcount = 1
