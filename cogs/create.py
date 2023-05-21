@@ -4,6 +4,7 @@ import os
 from image_process import slide
 import requests
 import discord
+import json
 
 def download_image(count, url, folder_path):
     response = requests.get(url)
@@ -19,7 +20,8 @@ class Create(commands.Cog):
         self.bot = bot
     
     @commands.command(name='create_comp', brief='create_comp {name of the comp} {number of cards}')
-    async def create_comp(self, ctx, msg: str, rang: int):
+    @commands.has_any_role(1004278166237487174, 1004976425599766588, 1074003818980847716)
+    async def create_comp(self, ctx, msg: str, rang: int, bg: str):
         dirs = [name for name in os.listdir(".") if os.path.isdir(name)]
         if msg == None:
             await ctx.send('Error no name specified.')
@@ -30,10 +32,19 @@ class Create(commands.Cog):
             dirr = os.getcwd()
             inp_path = f"{dirr}\in_{msg}"
             out_path = f"{dirr}\{msg}"
+            data = {
+                "comp": msg,
+                "bg": bg,
+                "inp_path": inp_path,
+                "out_path": out_path
+            }
             try: 
                 await ctx.send('starting')
                 os.mkdir(inp_path)
                 os.mkdir(out_path)
+                file_path = os.path.join(inp_path, "data.json")
+                with open(file_path, "w") as f:
+                    json.dump(data, f, indent=4)
                 count = 1
                 for i in range(int(rang)):
                     valid_input = False
@@ -53,7 +64,7 @@ class Create(commands.Cog):
                         except:
                             await ctx.send("Invalid input, please try again.")
                 await ctx.send(f'Uploaded {count-1} images to .\in_{msg}')
-                slide(inp_path, out_path)
+                slide(inp_path, out_path, bg)
             except OSError as error: 
                 await ctx.send(f'Check console for error')
                 print(error)
