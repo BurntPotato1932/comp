@@ -2,11 +2,10 @@ from discord.ext import commands
 import requests
 import discord
 import os
-import time
 from image_process import slide
 import requests
 import shutil
-
+import json
 
 def download_image(count, url, folder_path):
     response = requests.get(url)
@@ -48,6 +47,7 @@ class Select(commands.Cog):
         self.bot = bot
     
     @commands.command(name='select', brief='select {name of the comp} Select which card lost.')
+    @commands.has_any_role(1004278166237487174, 1004976425599766588, 1074003818980847716)
     async def select(self, ctx, msg=None):
         dirs = [name for name in os.listdir(".") if os.path.isdir(name)]
         if msg == None:
@@ -60,9 +60,9 @@ class Select(commands.Cog):
             inp_path = f"{dirr}\in_{msg}"
             out_path = f"{dirr}\{msg}"
             image_files = sorted(os.listdir(inp_path))
-            image_files = [f for f in image_files if f.endswith(".jpg") or f.endswith(".png")]
-            other_file = sorted(os.listdir(f"./{msg}"))
-            total_images = len(image_files)
+            image_files = [f for f in image_files if f.endswith(".png")]
+            other_file = sorted(os.listdir(out_path))
+            other_file = [f for f in other_file if f.endswith(".png")]
             delete_list = []
             try:
                 count = 0
@@ -95,7 +95,10 @@ class Select(commands.Cog):
                         os.remove(file_path)
                     elif os.path.isdir(file_path):
                         shutil.rmtree(file_path)
-                slide(inp_path, out_path)
+                json_file_path = os.path.join(inp_path, "data.json")
+                with open(json_file_path, "r") as f:
+                    data = json.load(f)
+                slide(inp_path, out_path, data["bg"])
                 await ctx.send(f'Matches made')
             except OSError as error: 
                 print(error)
