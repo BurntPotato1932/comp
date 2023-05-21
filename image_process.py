@@ -47,13 +47,5 @@ def slide(inp, outp, bg):
             image2_path = os.path.join(input_folder, image_files[i+1])
 
             output_image = process_image(image1_path, image2_path)
-            output_image_path = os.path.join(output_folder, f"{i//2}.png")
+            output_image_path = os.path.join(output_folder, f"{i}_{str(image_files[i][:-4])}-{str(image_files[i+1][:-4])}.png")
             output_image.save(output_image_path)
-
-
-# dirr = os.getcwd()
-# inp_path = f"{dirr}\\in_test"
-# out_path = f"{dirr}\\test"
-# ib = 'smol'
-
-# slide(inp_path, out_path, ib)
