@@ -14,7 +14,8 @@ cogs = [
    "comp_commands.create",
    "comp_commands.reshuffle",
    "comp_commands.2v2_create",
-   "comp_commands.svs_create"
+   "comp_commands.svs_create",
+   "comp_commands.bg_view"
 ]
 
 intents = discord.Intents.all()
