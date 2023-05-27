@@ -2,6 +2,7 @@ from discord.ext import commands
 import requests
 import discord
 import os
+import time
 from image_process import slide
 import requests
 import shutil
@@ -99,7 +100,7 @@ class Select(commands.Cog):
                 with open(json_file_path, "r") as f:
                     data = json.load(f)
                 slide(inp_path, out_path, data["bg"])
-                await ctx.send(f'Matches made')
+                await ctx.send(f'Matches made.')
             except OSError as error: 
                 print(error)
             except LoopEscapeException:
