@@ -2,17 +2,19 @@ import discord
 from discord.ext import commands
 import asyncio
 import datetime
+import os
 from dotenv import load_dotenv
 from os import getenv
-import os
-
 load_dotenv()
 
 cogs = [
-   "cogs.selection",
-   "cogs.background",
-   "cogs.post",
-   "cogs.create"
+   "comp_commands.selection",
+   "comp_commands.background",
+   "comp_commands.post",
+   "comp_commands.create",
+   "comp_commands.reshuffle",
+   "comp_commands.2v2_create",
+   "comp_commands.svs_create"
 ]
 
 intents = discord.Intents.all()
@@ -20,7 +22,7 @@ bot = commands.Bot(command_prefix=';', intents=intents)
 
 @bot.event
 async def on_ready():
-  print(f'We have logged in as {bot.user}\nDiscord.py Version: {discord.__version__} Time: {datetime.datetime.now()}\n')
+  print(f'We have logged in as {bot.user}\nDiscord.py Version: {discord.__version__}  Date: {datetime.datetime.now().strftime("%m/%d/%y %I:%M:%S %p")}\n')
 
 @bot.command()
 async def pong(ctx):
