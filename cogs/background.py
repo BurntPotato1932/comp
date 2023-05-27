@@ -34,10 +34,8 @@ def save_png_details(file_path, card1, card2):
 
         file_name = os.path.splitext(img.filename)[0]
         output_file = os.path.join(directory, file_name + ".json")
-
         with open(output_file, "w") as f:
             json.dump(details, f, indent=4)
-        
     except Exception as e:
         print(f"Error: {e}")
 
@@ -48,9 +46,9 @@ class Background(commands.Cog):
     @commands.command(name='add_bg', brief='')
     @commands.has_any_role(1004278166237487174, 1004976425599766588, 1074003818980847716)
     async def add_bg(self, ctx, name: str, card1: str, card2: str):
-        dirr = os.getcwd()
-        path = f"{dirr}\\bgs"
-        img_path = f"{dirr}\\bgs\\{name}.png"
+        dir = os.getcwd()
+        path = f"{dir}\\bgs"
+        img_path = f"{dir}\\bgs\\{name}.png"
         if ctx.message.attachments:
             url = ctx.message.attachments[0].url
             download_image(name, url, path)
