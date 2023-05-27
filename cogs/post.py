@@ -10,8 +10,7 @@ class Post(commands.Cog):
     @commands.command(name='post', brief='Posts the matches')
     @commands.has_any_role(1004278166237487174, 1004976425599766588, 1074003818980847716)
     async def post(self, ctx, msg=None):
-        count = 0
-        pcount = 1
+        count = 1
         msg = str(msg).lower()
         temp_name = msg.replace("_", " ")
         name = temp_name.title()
@@ -24,10 +23,13 @@ class Post(commands.Cog):
             if f.endswith(".png"):
                 valid_input = False
                 while not valid_input:
-                    msg_sent = await ctx.send(f"Match {pcount}!", file=discord.File(f'./{msg}/{f}'))
+                    msg_sent = await ctx.send(f"Match {count}!", file=discord.File(f'./{msg}/{f}'))
                     count += 1
-                    pcount += 1
-                    await self.bot.wait_for('message', check=check)
+                    if ctx.message.guild.id == 1004277805950980106:
+                        await self.bot.wait_for('message', check=check)
+                    else:
+                        await msg_sent.add_reaction("1️⃣")
+                        await msg_sent.add_reaction("2️⃣")
                     time. sleep(2) 
                     valid_input = True
 
